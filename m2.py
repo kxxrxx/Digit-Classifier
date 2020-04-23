@@ -18,7 +18,7 @@ start = time.time()
 
 batch_size = 128 # 128 images trained at a time
 num_classes = 10 # 0 to 9 = 10 classes
-epochs = 12
+epochs = 2
 
 # input image dimensions
 img_rows, img_cols = 28, 28
@@ -55,6 +55,7 @@ print(x_test.shape[0], 'test samples')
 
 # convert class vectors to binary class matrices
 # contains labels from 0 to 9
+# one hot encodes target values (outputs one 1, rest 0)
 y_train = keras.utils.to_categorical(y_train, num_classes)
 y_test = keras.utils.to_categorical(y_test, num_classes)
 # y_train[0] = [0., 0., 0., 0., 0., 1., 0., 0., 0., 0.] for #5
@@ -64,7 +65,9 @@ model.add(Conv2D(32, kernel_size=(3, 3), # 32 filters, kernel = size of filter,
                  activation='relu', # rectified linear unit
                  # f(x) = max(0,x), sets neg vals to 0, constant input x 
                  input_shape=input_shape)) # input shape for first layer
+model.add(Conv2D(32, (5, 5), activation='relu'))
 model.add(Conv2D(64, (3, 3), activation='relu'))
+model.add(Conv2D(64, (5, 5), activation='relu'))
 model.add(MaxPooling2D(pool_size=(2, 2))) # downsamples the input
 model.add(Dropout(0.25)) # randomly disables 25% of neurons (reduces overfitting)
 model.add(Flatten()) # flattens the 2D arrays for fully connected layers
@@ -74,7 +77,7 @@ model.add(Dense(num_classes, activation='softmax')) # num_classes = 10, units in
 # outputs max probability
 
 model.compile(loss=keras.losses.categorical_crossentropy, # for multi-classification (>2, binary = 2)
-              optimizer=keras.optimizers.Adadelta(), # learning rate = 1, rho = 0.95
+              optimizer=keras.optimizers.Nadam(), # learning rate = 1, rho = 0.95
               metrics=['accuracy'])
 
 model.fit(x_train, y_train, # trains the model

@@ -11,15 +11,15 @@ from keras.datasets import mnist
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
+from keras.layers.normalization import BatchNormalization
 from keras import backend as K
 import time
 
 start = time.time()
 
-batch_size = 128 # each iteration trains 128 images; 
-# increasing batch size improves model up to a certain point
+batch_size = 128 # 128 images trained at a time
 num_classes = 10 # 0 to 9 = 10 classes
-epochs = 3 # iterations over the entire dataset
+epochs = 2
 
 # input image dimensions
 img_rows, img_cols = 28, 28
@@ -49,11 +49,7 @@ x_train /= 255
 x_test /= 255
 # makes each pixel within [0,1] instead of [0, 255]
 
-
-# x_train.shape = (60000, 28, 28, 1)
-# y_train.shape = (60000,)
-# x_test.shape = (10000, 28, 28, 1)
-# y_test.shape = (10000,)
+# x_test.shape = (10000, 28, 28)
 print('x_train shape:', x_train.shape) # (60000, 28, 28, 1)
 print(x_train.shape[0], 'train samples')
 print(x_test.shape[0], 'test samples')
@@ -69,21 +65,21 @@ model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3), # 32 filters, kernel = size of filter,
                  activation='relu', # rectified linear unit
                  # f(x) = max(0,x), sets neg vals to 0, constant input x 
-                 # try sigmoid
                  input_shape=input_shape)) # input shape for first layer
-                 # infers the shape for later layers
-model.add(Conv2D(64, (3, 3), activation='relu')) # 64 filters in this layer
-model.add(MaxPooling2D(pool_size=(2, 2))) # downsamples the input
-model.add(Dropout(0.25)) # randomly disables 25% of neurons (reduces overfitting)
-model.add(Flatten()) # flattens the 2D arrays to connect the conv and dense layers
+model.add(Conv2D(32, (5, 5), activation='relu'))
+model.add(Dropout(0.4))
+model.add(Conv2D(64, (3, 3), activation='relu'))
+model.add(Conv2D(64, (5, 5), activation='relu'))
+model.add(MaxPooling2D(pool_size=(3, 3))) # downsamples the input
+model.add(Dropout(0.4)) # randomly disables 25% of neurons (reduces overfitting)
+model.add(Flatten()) # flattens the 2D arrays for fully connected layers
 model.add(Dense(128, activation='relu')) # batch size = 128 = hidden neuron units
-model.add(Dropout(0.5))
-model.add(Dense(num_classes, activation='softmax')) # num_classes = 10 nodes in output layer
-# assigns probabilities to outputs that sum up to 1 then picks the max
+model.add(Dropout(0.4))
+model.add(Dense(num_classes, activation='softmax')) # num_classes = 10, units in output layer
+# outputs max probability
 
 model.compile(loss=keras.losses.categorical_crossentropy, # for multi-classification (>2, binary = 2)
-              optimizer=keras.optimizers.Adadelta(), # learning rate = 1, rho = 0.95
-              # try optimizer = Adam, SGM, Nadam, Adamax, Adagrad, RMSprop 
+              optimizer=keras.optimizers.Nadam(), # learning rate = 1, rho = 0.95
               metrics=['accuracy'])
 
 model.fit(x_train, y_train, # trains the model
