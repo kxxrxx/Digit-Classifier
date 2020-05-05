@@ -148,7 +148,7 @@ class MainApp:
 
                 self.prediction = StringVar()
                 self.lbl_prediction = Label(self.area_predict, textvariable=self.prediction)
-                self.lbl_prediction.pack(side=LEFT, ipadx=0)
+                self.lbl_prediction.pack(side=LEFT)
                 self.prediction.set(self.model.predict())
 
 
