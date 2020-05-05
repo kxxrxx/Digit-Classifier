@@ -10,9 +10,9 @@ Update:
 
 Packages used:
 
-Tkinter - standard Python interface for creating GUI applications
-OpenCV - image and video processing library used to reformat images and recognize objects through a camera
-PIL - Python Imaging Library for image processing
+- Tkinter: standard Python interface for creating GUI applications
+- OpenCV:image and video processing library used to reformat images and recognize objects through a camera
+- PIL: Python Imaging Library for image processing
 
 Resources:
 
