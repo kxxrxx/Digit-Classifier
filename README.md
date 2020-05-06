@@ -9,6 +9,8 @@ Update:
 - Made a GUI that utilizes a model of the CNN to predict a digit drawn, uploaded, or captured on a camera by the user.
 
 ![drawing example](https://github.com/kxxrxx/Digit-Classifier/blob/master/drawing_ex.PNG)
+
+
 ![image example](https://github.com/kxxrxx/Digit-Classifier/blob/master/image_ex.PNG)
 
 Packages used:
