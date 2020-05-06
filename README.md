@@ -8,8 +8,8 @@ Update:
 
 - Made a GUI that utilizes a model of the CNN to predict a digit drawn, uploaded, or captured on a camera by the user.
 
-<img src="https://github.com/kxxrxx/Digit-Classifier/blob/master/drawing_ex.PNG" width=50% height=50%>
-<img src="https://github.com/kxxrxx/Digit-Classifier/blob/master/image_ex.PNG" width="400" height="790">
+<img src="https://github.com/kxxrxx/Digit-Classifier/blob/master/drawing_ex.PNG" width="50">
+<img src="https://github.com/kxxrxx/Digit-Classifier/blob/master/image_ex.PNG" width="100">
 
 
 
