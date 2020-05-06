@@ -7,8 +7,7 @@ The best result is a testing accuracy of 99.59%, testing loss of 0.019198, and a
 Update:
 
 - Made a GUI that utilizes a model of the CNN to predict a digit drawn, uploaded, or captured on a camera by the user.
-
-<img align="center" src="https://github.com/kxxrxx/Digit-Classifier/blob/master/drawing_ex.PNG" width="350">
+<p align="center"> <src="https://github.com/kxxrxx/Digit-Classifier/blob/master/drawing_ex.PNG" width="350"> </p>
 
 Packages used:
 
