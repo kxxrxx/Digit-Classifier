@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Apr 15 18:33:59 2020
-
-@author: Keisha
-"""
-
 from __future__ import print_function
 import keras
 from keras.datasets import mnist
