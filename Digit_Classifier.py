@@ -40,7 +40,7 @@ else: # 'channels last' used in Tensorflow
     input_shape = (img_rows, img_cols, 1) # 28x28x1 = 784
 
 # contains greyscale RGB code (0-255)
-# convert to gloat to get decimal points after division
+# convert to float to get decimal points after division
 x_train = x_train.astype('float32') 
 x_test = x_test.astype('float32')
 # Normalizes the RGB codes by dividing to the max RGB value
